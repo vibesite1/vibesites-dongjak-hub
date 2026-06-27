@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동작구 시설관리공단 - 구민과 함께하는 행복도시 동작</title>
+    <style>
+        :root {
+            --primary-color: #0056b3; /* 동작구 상징색 (파랑 계열) */
+            --secondary-color: #007bff;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --white: #fff;
+            --dark-gray: #555;
+            --border-color: #ddd;
+        }
+
+        /* Basic Reset & Typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--white);
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .bg-light {
+            background-color: var(--light-bg);
+        }
+
+        h1, h2, h3, h4 {
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+        }
+
+        h2 {
+            font-size: 2.5em;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        h3::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 12px 25px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            margin: 0;
+        }
+
+        .logo a {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            font-size: 2em;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 0 10px;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: url('https://via.placeholder.com/1500x600/0056b3/ffffff?text=동작구+시설관리공단') no-repeat center center/cover;
+            color: var(--white);
+            text-align: center;
+            padding: 150px 20px;
+            position: relative;
+        }
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
+        }
+
+        #hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        #hero h2 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        #hero p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            color: var(--white);
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .about-content p {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .about-content ul {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            list-style: none;
+            padding: 20px;
+            background-color: var(--white);
+            border-left: 5px solid var(--primary-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .about-content ul li {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+        }
+        .about-content ul li::before {
+            content: '✓';
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        /* Facility & Service Grids */
+        .facility-grid, .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .facility-item, .service-item {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .facility-item:hover, .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .facility-item img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .facility-item h4, .service-item h4 {
+            font-size: 1.5em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .facility-item p, .service-item p {
+            font-size: 1em;
+            color: var(--dark-gray);
+        }
+
+        /* News Section */
+        .news-list {
+            margin-bottom: 40px;
+        }
+
+        .news-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-item span {
+            font-size: 0.9em;
+            color: var(--dark-gray);
+            flex-shrink: 0;
+            margin-right: 20px;
+        }
+
+        .news-item a {
+            flex-grow: 1;
+            font-size: 1.1em;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+
+        .news-item a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Contact Section */
+        .contact-info {
+            text-align: center;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+
+        .contact-info p strong {
+            color: var(--primary-color);
+        }
+
+        .map-placeholder {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+        .map-placeholder iframe {
+            display: block; /* Remove extra space below iframe */
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            color: var(--white);
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        footer .footer-links {
+            margin-top: 10px;
+        }
+
+        footer .footer-links a {
+            color: var(--white);
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        footer .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .logo {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 15px;
+            }
+            .nav-toggle {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 25px;
+            }
+
+            #main-nav {
+                width: 100%;
+                order: 1;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                display: none;
+                background-color: var(--white);
+                border-top: 1px solid var(--border-color);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0;
+                border-bottom: 1px solid var(--light-bg);
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links li a {
+                display: block;
+                padding: 15px 20px;
+                color: var(--text-color);
+            }
+            .nav-links li a:hover {
+                background-color: var(--light-bg);
+            }
+            .nav-links a::after {
+                display: none;
+            }
+
+            #hero {
+                padding: 100px 20px;
+            }
+
+            #hero h2 {
+                font-size: 2.5em;
+            }
+
+            #hero p {
+                font-size: 1em;
+            }
+
+            h3 {
+                font-size: 1.8em;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .news-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .news-item span {
+                margin-bottom: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 2em;
+            }
+            h3 {
+                font-size: 1.5em;
+            }
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo"><a href="#">동작구 시설관리공단</a></h1>
+            <nav id="main-nav">
+                <ul class="nav-links">
+                    <li><a href="#about">공단소개</a></li>
+                    <li><a href="#facilities">주요시설</a></li>
+                    <li><a href="#services">사업안내</a></li>
+                    <li><a href="#news">정보마당</a></li>
+                    <li><a href="#contact">고객센터</a></li>
+                </ul>
+                <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container">
+            <h2>구민과 함께하는 행복도시 동작</h2>
+            <p>동작구 시설관리공단은 구민의 삶의 질 향상을 위해 최선을 다합니다.</p>
+            <a href="#services" class="btn">사업 더 알아보기</a>
+        </div>
+    </section>
+
+    <section id="about" class="section-padding">
+        <div class="container">
+            <h3>공단 소개</h3>
+            <div class="about-content">
+                <p>동작구 시설관리공단은 동작구의 다양한 공공시설을 효율적으로 관리하고 운영하여 구민들에게 쾌적하고 안전한 환경을 제공합니다. 체육, 문화, 주차, 환경 등 여러 분야에서 전문적인 서비스를 제공하며 지역사회 발전에 기여하고 있습니다.</p>
+                <ul>
+                    <li>✅ 투명하고 효율적인 시설 운영</li>
+                    <li>✅ 구민 중심의 맞춤형 서비스 제공</li>
+                    <li>✅ 지속 가능한 도시 환경 조성</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="facilities" class="section-padding bg-light">
+        <div class="container">
+            <h3>주요 시설</h3>
+            <div class="facility-grid">
+                <div class="facility-item">
+                    <img src="https://via.placeholder.com/300x200/0056b3/ffffff?text=체육센터" alt="체육센터">
+                    <h4>체육센터</h4>
+                    <p>수영, 헬스, GX 등 다양한 체육 프로그램 운영</p>
+                </div>
+                <div class="facility-item">
+                    <img src="https://via.placeholder.com/300x200/0056b3/ffffff?text=공영주차장" alt="공영주차장">
+                    <h4>공영주차장</h4>
+                    <p>도심 주차난 해소를 위한 편리한 주차시설</p>
+                </div>
+                <div class="facility-item">
+                    <img src="https://via.placeholder.com/300x200/0056b3/ffffff?text=도서관" alt="도서관">
+                    <h4>도서관/문화시설</h4>
+                    <p>구민의 지식 함양 및 문화생활 증진</p>
+                </div>
+                <div class="facility-item">
+                    <img src="https://via.placeholder.com/300x200/0056b3/ffffff?text=공원녹지" alt="공원녹지">
+                    <h4>공원 및 녹지</h4>
+                    <p>쾌적한 휴식 공간 제공 및 환경 개선</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section-padding">
+        <div class="container">
+            <h3>주요 사업</h3>
+            <div class="service-grid">
+                <div class="service-item">
+                    <h4>체육시설 관리</h4>
+                    <p>다양한 체육시설의 운영 및 유지보수</p>
+                </div>
+                <div class="service-item">
+                    <h4>주차시설 관리</h4>
+                    <p>공영주차장 및 거주자우선주차 관리</p>
+                </div>
+                <div class="service-item">
+                    <h4>환경 개선 사업</h4>
+                    <p>가로 청소, 재활용품 수거 등 환경 미화</p>
+                </div>
+                <div class="service-item">
+                    <h4>공원/녹지 관리</h4>
+                    <p>공원, 쉼터 등 녹지 공간 조성 및 관리</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="news" class="section-padding bg-light">
+        <div class="container">
+            <h3>새 소식</h3>
+            <div class="news-list">
+                <div class="news-item">
+                    <span>2023.10.26</span>
+                    <a href="#">겨울철 시설물 안전 점검 실시 안내</a>
+                </div>
+                <div class="news-item">
+                    <span>2023.10.20</span>
+                    <a href="#">2024년 상반기 체육프로그램 수강생 모집</a>
+                </div>
+                <div class="news-item">
+                    <span>2023.10.15</span>
+                    <a href="#">공단 고객만족도 조사 실시 (참여 부탁드립니다)</a>
+                </div>
+            </div>
+            <a href="#" class="btn btn-secondary">더 많은 소식 보기</a>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <h3>고객센터</h3>
+            <p>궁금한 점이 있으시면 언제든지 문의해주세요.</p>
+            <div class="contact-info">
+                <p><strong>주소:</strong> 서울특별시 동작구 여의대방로20길 33 (신대방동)</p>
+                <p><strong>전화:</strong> 02-820-2200</p>
+                <p><strong>팩스:</strong> 02-817-5678</p>
+                <p><strong>이메일:</strong> webmaster@dongjak.or.kr</p>
+            </div>
+            <div class="map-placeholder">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.7380908865664!2d126.92487921530931!3d37.50285647981503!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9f697d096333%3A0x6a0a8f8e0d6b6e70!2z67mE7KCV6rOg7KeA7IKs7JqM7JWE7JqM7JuQ!5e0!3m2!1sko!2skr!4v1678886400000!5m2!1sko!2skr" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 동작구 시설관리공단. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">개인정보처리방침</a> | <a href="#">이용약관</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (navToggle && navLinks) {
+                navToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                });
+
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (navLinks.classList.contains('active')) {
+                            navLinks.classList.remove('active');
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
